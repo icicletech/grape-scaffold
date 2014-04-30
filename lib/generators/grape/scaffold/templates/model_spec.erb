@@ -1,0 +1,44 @@
+require 'spec_helper'
+
+describe <%= model_name.camelize.singularize %> do
+  let(:<%= model_name.underscore.singularize %>) { create(:<%= model_name.underscore.singularize %>) }
+
+  context '#object' do
+    it 'should be valid' do
+      <%= model_name.underscore.singularize %>.should be_valid
+    end
+  end
+
+    context '#associations' do
+      <%- attributes.each do |attribute| -%>
+      <%- if attribute_is_id?(attribute) -%>
+      it { should belong_to(:<%= attribute_without_id(attribute) -%>) }
+      <%- end -%>
+      <%- end -%>
+      pending
+    end
+
+    context '#values' do
+      <%- attributes.each do |attribute| -%>
+      <%- unless attribute_is_id?(attribute) -%>
+      it { should respond_to(:<%= attribute_name(attribute) %>) }
+      <%- end -%>
+      <%- end -%>
+    end
+
+    context '#scopes' do
+      pending
+    end
+
+    context '#validations' do
+      pending
+    end
+
+    context '#methods' do
+      pending
+    end
+
+    context '#callbacks' do
+      pending
+    end
+end
