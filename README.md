@@ -14,7 +14,7 @@ And then execute:
 
 ## Usage
 ### Scaffold
-  The scaffold works similar to the Rails scaffold, you just pass in the name of the model along with it's attributes.
+  The scaffold generator works similar to the Rails scaffold, it takes the model name and it's attributes as arguments.
 
     $ rails g grape:scaffold Model [Attributes]
 
@@ -24,7 +24,7 @@ And then execute:
   * --controller-path=CONTROLLER_PATH - This can be used to set the path where the controller is generated. By default it's generated under app/controllers/api/v1/
 
 ### Controller
-  If only the controller and controller specs are required, this generator can be used.
+  The controller generator can be used to generate only the controller and controller specs.
 
     $ rails g grape:controller Model
 
