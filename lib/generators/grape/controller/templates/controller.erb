@@ -1,0 +1,70 @@
+module API
+  module V1
+    class <%= model_name.camelize.pluralize %> < Grape::API
+      include API::V1::Defaults
+
+      resource :<%= model_name.pluralize.underscore %> do
+        # Get a list of <%= model_name.pluralize.underscore %>
+        #
+        # Example Request:
+        #   GET /v1/<%= model_name.pluralize.underscore %>
+        get do
+          <%= model_name.camelize.singularize %>.all
+        end
+
+        # Get a single <%= model_name.underscore.singularize %>
+        #
+        # Parameters:
+        #   id (required) - The ID of a <%= model_name.underscore.singularize %>
+        # Example Request:
+        #   GET /v1/<%= model_name.pluralize.underscore %>/:id
+        params do
+          requires :id
+        end
+        get ':id' do
+          <%= model_name.camelize.singularize %>.find(permitted_params[:id])
+        end
+
+        # Create a new <%= model_name.underscore.singularize %>
+        #
+        # Example Request:
+        #   POST /v1/<%= model_name.pluralize.underscore %>
+        post do
+          <%= model_name.underscore.singularize %> = <%= model_name.camelize.singularize %>.new(permitted_params)
+          if <%= model_name.underscore.singularize %>.save
+            <%= model_name.underscore.singularize %>
+          else
+            <%= model_name.underscore.singularize %>.errors
+          end
+        end
+
+        # Delete a <%= model_name.underscore.singularize %>
+        #
+        # Example Request:
+        #   DELETE /v1/<%= model_name.pluralize.underscore %>/:id
+        params do
+          requires :id
+        end
+        delete ':id' do
+          <%= model_name.camelize.singularize %>.destroy(permitted_params[:id])
+        end
+
+        # Edit a <%= model_name.underscore.singularize %>
+        #
+        # Example Request:
+        #   PUT /v1/<%= model_name.pluralize.underscore %>/:id
+        params do
+          requires :id
+        end
+        put ':id' do
+          <%= model_name.underscore.singularize %> = <%= model_name.camelize.singularize %>.find(permitted_params[:id])
+          if <%= model_name.underscore.singularize %>.update(permitted_params)
+            <%= model_name.underscore.singularize %>
+          else
+            <%= model_name.underscore.singularize %>.errors
+          end
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,211 @@
+require 'spec_helper'
+
+describe '<%= model_name.camelize.pluralize %>' do
+  let(:account) { create(:account) }
+  let(:user) { create(:user, account: account) }
+  let(:token) { create(:oauth_token, resource_owner_id: user.id) }
+
+  describe 'GET /v1/<%= model_name.pluralize.underscore %>' do
+    context 'without user token' do
+      before do
+        get '/v1/<%= model_name.pluralize.underscore %>'
+      end
+
+      it_behaves_like 'an_unauthenticated_endpoint'
+    end
+
+    context 'with user token' do
+      describe 'should return <%= model_name.underscore.singularize %> list' do
+        before do
+          @<%= model_name.underscore.singularize %> = create(:<%= model_name.underscore.singularize %>, account: account)
+          get '/v1/<%= model_name.pluralize.underscore %>', access_token: token.token
+        end
+
+        it 'returns 200 success status' do
+          expect(response.response_code).to eq 200
+        end
+
+        it 'returns a <%= model_name.underscore.singularize %>' do
+          expect(json.length).to eq 1
+        end
+
+        it 'returns the same <%= model_name.underscore.singularize %>' do
+          pending
+        end
+      end
+
+      describe 'should return only 10 <%= model_name.underscore.singularize %> entries' do
+        before do
+          20.times do
+            create(:<%= model_name.underscore.singularize %>, account: account)
+          end
+          get '/v1/<%= model_name.pluralize.underscore %>', access_token: token.token
+        end
+
+        it 'returns 200 success status' do
+          expect(response.response_code).to eq 200
+        end
+
+        it 'returns 10 <%= model_name.pluralize.underscore %>' do
+          expect(json.length).to eq 10
+        end
+
+        it 'returns 20 as X-Total header' do
+          expect(response.headers['X-Total']).to eq '20'
+        end
+
+        it 'returns 2 as X-Total-Pages header' do
+          expect(response.headers['X-Total-Pages']).to eq '2'
+        end
+
+        it 'returns 1 as X-Page header' do
+          expect(response.headers['X-Page']).to eq '1'
+        end
+
+        it 'returns 10 as X-Per-Page header' do
+          expect(response.headers['X-Per-Page']).to eq '10'
+        end
+      end
+    end
+  end
+
+  describe 'GET /v1/<%= model_name.pluralize.underscore %>/:id' do
+    context 'without user token' do
+      before do
+        get '/v1/<%= model_name.pluralize.underscore %>/00000000-0000-0000-0000-000000000000'
+      end
+
+      it_behaves_like 'an_unauthenticated_endpoint'
+    end
+
+    context 'with user token' do
+      describe 'should return <%= model_name.underscore.singularize %> details' do
+        before do
+          @<%= model_name.underscore.singularize %> = create(:<%= model_name.underscore.singularize %>, account: account)
+          get "/v1/<%= model_name.pluralize.underscore %>/#{@<%= model_name.underscore.singularize %>.id}", access_token: token.token
+        end
+
+        it 'returns 200 success status' do
+          expect(response.response_code).to eq 200
+        end
+
+        it 'returns a <%= model_name.underscore.singularize %>' do
+          pending
+        end
+      end
+    end
+  end
+
+  describe 'POST /v1/<%= model_name.pluralize.underscore %>' do
+    context 'without user token' do
+      before do
+        post '/v1/<%= model_name.pluralize.underscore %>'
+      end
+
+      it_behaves_like 'an_unauthenticated_endpoint'
+    end
+
+    context 'with user token' do
+      before do
+        post '/v1/<%= model_name.pluralize.underscore %>', access_token: token.token
+      end
+
+      describe 'should save permitted parameters' do
+        it 'returns 201 success status' do
+          expect(response.response_code).to eq 201
+        end
+
+        it 'saves the <%= model_name.underscore.singularize %>' do
+          expect(<%= model_name.camelize.singularize %>.all.count).to eq 1
+        end
+
+        it 'saves the <%= model_name.underscore.singularize %> with correct attributes' do
+          pending
+        end
+      end
+
+      describe 'should ignore un-permitted parameters' do
+        before(:each) do
+          post '/v1/<%= model_name.pluralize.underscore %>', access_token: token.token, account_id: '00000000-0000-0000-0000-000000000000'
+        end
+
+        it 'returns 201 success status' do
+          expect(response.response_code).to eq 201
+        end
+
+        it 'does not save un-permitted parameter' do
+          expect(<%= model_name.camelize.singularize %>.first.account_id).to_not eq '00000000-0000-0000-0000-000000000000'
+        end
+      end
+    end
+  end
+
+  describe 'PUT /v1/<%= model_name.pluralize.underscore %>/:id' do
+    context 'without user token' do
+      before do
+        put '/v1/<%= model_name.pluralize.underscore %>/00000000-0000-0000-0000-0000000000000000'
+      end
+
+      it_behaves_like 'an_unauthenticated_endpoint'
+    end
+
+    context 'with user token' do
+      describe 'should save permitted parameters' do
+        before do
+          @<%= model_name.underscore.singularize %> = create(:<%= model_name.underscore.singularize %>, account: account)
+          put "/v1/<%= model_name.pluralize.underscore %>/#{@<%= model_name.underscore.singularize %>.id}", access_token: token.token
+        end
+
+        it 'returns 200 success status' do
+          expect(response.response_code).to eq 200
+        end
+
+        it 'updates the <%= model_name.underscore.singularize %>' do
+          pending
+        end
+      end
+
+      describe 'should ignore un-permitted parameters' do
+        before do
+          @<%= model_name.underscore.singularize %> = create(:<%= model_name.underscore.singularize %>, account: account)
+          put "/v1/<%= model_name.pluralize.underscore %>/#{@<%= model_name.underscore.singularize %>.id}", access_token: token.token, account_id: '00000000-0000-0000-0000-000000000000'
+        end
+
+        it 'returns 200 success status' do
+          expect(response.response_code).to eq 200
+        end
+
+        it 'does not save un-permitted parameter' do
+          expect(<%= model_name.camelize.singularize %>.find(@<%= model_name.underscore.singularize %>.id).account_id).to_not eq '00000000-0000-0000-0000-000000000000'
+        end
+      end
+    end
+  end
+
+  describe 'DELETE /v1/<%= model_name.pluralize.underscore %>/:id' do
+    context 'without user token' do
+      before do
+        delete '/v1/<%= model_name.pluralize.underscore %>/00000000-0000-0000-0000-0000000000000000'
+      end
+
+      it_behaves_like 'an_unauthenticated_endpoint'
+    end
+
+    context 'with user token' do
+      describe 'should delete <%= model_name.underscore.singularize %>' do
+        before(:each) do
+          @<%= model_name.underscore.singularize %> = create(:<%= model_name.underscore.singularize %>, account: account)
+          delete "/v1/<%= model_name.pluralize.underscore %>/#{@<%= model_name.underscore.singularize %>.id}", access_token: token.token
+        end
+
+        it 'returns 200 success status' do
+          expect(response.response_code).to eq 200
+        end
+
+        it 'deletes the <%= model_name.underscore.singularize %>' do
+          expect(<%= model_name.camelize.singularize %>.all.count).to eq 0
+        end
+      end
+    end
+  end
+end

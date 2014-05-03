@@ -1,0 +1,8 @@
+Description:
+  Creates a Grape controller.
+
+Example:
+    rails generate grape:controller MODEL
+
+    This will create:
+      A controller with the model name.
