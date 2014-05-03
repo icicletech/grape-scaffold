@@ -2,7 +2,7 @@ Description:
   Scaffolds Grape API resource including model, controller, and specs.
 
 Example:
-    rails generate grape_scaffold MODEL ATTRIBUTES
+    rails generate grape:scaffold MODEL ATTRIBUTES
 
     This will create:
       The model, controller, and specs.

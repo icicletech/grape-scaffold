@@ -1,5 +1,3 @@
-require 'rails/generators/base'
-
 module Grape
   class ScaffoldGenerator < Rails::Generators::Base
     source_root File.expand_path('../templates', __FILE__)
@@ -7,20 +5,28 @@ module Grape
     argument :model_name, type: :string
     argument :attributes, type: :array, default: []
 
+    class_option :controller_path, desc: 'Set default controller path', type: :string, defaut: 'app/controllers/api/v1'
+    class_option :skip_model_tests, :desc => 'Skip generated model tests', :type => :boolean
+    class_option :skip_controller_tests, :desc => 'Skip generated controller tests', :type => :boolean
+
     def generate_model
       generate 'model', "#{model_name} #{attributes.join(' ')}"
     end
 
     def generate_model_specs
-      template 'model_spec.erb', "spec/models/#{model_name.singularize.underscore}_spec.rb"
+      unless options[:skip_model_tests]
+        template 'model_spec.erb', "spec/models/#{model_name.singularize.underscore}_spec.rb"
+      end
     end
 
     def generate_controller
-      template 'controller.erb', "app/controllers/api/v1/#{model_name.pluralize.underscore}.rb"
+      template 'controller.erb', "#{options[:controller_path]}/#{model_name.pluralize.underscore}.rb"
     end
 
     def generate_controller_specs
-      template 'controller_spec.erb', "spec/requests/#{model_name.singularize.underscore}_spec.rb"
+      unless options[:skip_controller_tests]
+        template 'controller_spec.erb', "spec/requests/#{model_name.singularize.underscore}_spec.rb"
+      end
     end
 
     protected
