@@ -1,7 +1,6 @@
 module API
   module V1
     class <%= model_name.camelize.pluralize %> < Grape::API
-      include API::V1::Defaults
 
       resource :<%= model_name.pluralize.underscore %> do
         # Get a list of <%= model_name.pluralize.underscore %>
@@ -22,7 +21,7 @@ module API
           requires :id
         end
         get ':id' do
-          <%= model_name.camelize.singularize %>.find(permitted_params[:id])
+          <%= model_name.camelize.singularize %>.find(params[:id])
         end
 
         # Create a new <%= model_name.underscore.singularize %>
@@ -30,7 +29,7 @@ module API
         # Example Request:
         #   POST /v1/<%= model_name.pluralize.underscore %>
         post do
-          <%= model_name.underscore.singularize %> = <%= model_name.camelize.singularize %>.new(permitted_params)
+          <%= model_name.underscore.singularize %> = <%= model_name.camelize.singularize %>.new(params)
           if <%= model_name.underscore.singularize %>.save
             <%= model_name.underscore.singularize %>
           else
@@ -46,7 +45,7 @@ module API
           requires :id
         end
         delete ':id' do
-          <%= model_name.camelize.singularize %>.destroy(permitted_params[:id])
+          <%= model_name.camelize.singularize %>.destroy(params[:id])
         end
 
         # Edit a <%= model_name.underscore.singularize %>
@@ -57,8 +56,8 @@ module API
           requires :id
         end
         put ':id' do
-          <%= model_name.underscore.singularize %> = <%= model_name.camelize.singularize %>.find(permitted_params[:id])
-          if <%= model_name.underscore.singularize %>.update(permitted_params)
+          <%= model_name.underscore.singularize %> = <%= model_name.camelize.singularize %>.find(params[:id])
+          if <%= model_name.underscore.singularize %>.update(params)
             <%= model_name.underscore.singularize %>
           else
             <%= model_name.underscore.singularize %>.errors
