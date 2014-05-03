@@ -25,6 +25,7 @@ And then execute:
 
 ### Controller
   If only the controller and controller specs are required, this generator can be used.
+
     $ rails g grape:controller Model
 
 #### Options
