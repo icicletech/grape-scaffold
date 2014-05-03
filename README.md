@@ -19,9 +19,9 @@ And then execute:
     $ rails g grape:scaffold Model [Attributes]
 
 #### Options
-  * --skip-model-tests - Skips model tests
+  * --skip-model-tests - Skip model tests
   * --skip-controller-tests - Skip controller tests
-  * --controller-path=CONTROLLER_PATH - This can be used to set the path were the controller is generated. By default it's generated under app/controllers/api/v1/
+  * --controller-path=CONTROLLER_PATH - This can be used to set the path where the controller is generated. By default it's generated under app/controllers/api/v1/
 
 ### Controller
   If only the controller and controller specs are required, this generator can be used.
@@ -30,4 +30,4 @@ And then execute:
 
 #### Options
   * --skip-controller-tests - Skip controller tests
-  * --controller-path=CONTROLLER_PATH - This can be used to set the path were the controller is generated. By default it's generated under app/controllers/api/v1/
+  * --controller-path=CONTROLLER_PATH - This can be used to set the path where the controller is generated. By default it's generated under app/controllers/api/v1/
