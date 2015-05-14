@@ -31,3 +31,11 @@ And then execute:
 #### Options
   * --skip-controller-tests - Skip controller tests
   * --controller-path=CONTROLLER_PATH - This can be used to set the path where the controller is generated. By default it's generated under app/controllers/api/v1/
+
+### Contributors
+
+* [Shrivara K S](https://github.com/shrivaraks)
+
+### License
+
+Available under the MIT License.
