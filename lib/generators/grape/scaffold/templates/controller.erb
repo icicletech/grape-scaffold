@@ -37,17 +37,6 @@ module API
           end
         end
 
-        # Delete a <%= model_name.underscore.singularize %>
-        #
-        # Example Request:
-        #   DELETE /v1/<%= model_name.pluralize.underscore %>/:id
-        params do
-          requires :id
-        end
-        delete ':id' do
-          <%= model_name.camelize.singularize %>.destroy(params[:id])
-        end
-
         # Edit a <%= model_name.underscore.singularize %>
         #
         # Example Request:
@@ -62,6 +51,17 @@ module API
           else
             <%= model_name.underscore.singularize %>.errors
           end
+        end
+
+        # Delete a <%= model_name.underscore.singularize %>
+        #
+        # Example Request:
+        #   DELETE /v1/<%= model_name.pluralize.underscore %>/:id
+        params do
+          requires :id
+        end
+        delete ':id' do
+          <%= model_name.camelize.singularize %>.destroy(params[:id])
         end
       end
     end
