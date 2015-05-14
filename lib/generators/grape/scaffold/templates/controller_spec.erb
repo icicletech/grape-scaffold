@@ -11,14 +11,6 @@ describe '<%= model_name.camelize.pluralize %>' do
       it 'returns 200 success status' do
         expect(response.response_code).to eq 200
       end
-
-      it 'returns a <%= model_name.underscore.singularize %>' do
-        expect(json.length).to eq 1
-      end
-
-      it 'returns the same <%= model_name.underscore.singularize %>' do
-        pending
-      end
     end
   end
 
@@ -32,10 +24,6 @@ describe '<%= model_name.camelize.pluralize %>' do
       it 'returns 200 success status' do
         expect(response.response_code).to eq 200
       end
-
-      it 'returns a <%= model_name.underscore.singularize %>' do
-        pending
-      end
     end
   end
 
@@ -47,14 +35,6 @@ describe '<%= model_name.camelize.pluralize %>' do
 
       it 'returns 201 success status' do
         expect(response.response_code).to eq 201
-      end
-
-      it 'saves the <%= model_name.underscore.singularize %>' do
-        expect(<%= model_name.camelize.singularize %>.all.count).to eq 1
-      end
-
-      it 'saves the <%= model_name.underscore.singularize %> with correct attributes' do
-        pending
       end
     end
   end
@@ -69,10 +49,6 @@ describe '<%= model_name.camelize.pluralize %>' do
       it 'returns 200 success status' do
         expect(response.response_code).to eq 200
       end
-
-      it 'updates the <%= model_name.underscore.singularize %>' do
-        pending
-      end
     end
   end
 
@@ -85,10 +61,6 @@ describe '<%= model_name.camelize.pluralize %>' do
 
       it 'returns 200 success status' do
         expect(response.response_code).to eq 200
-      end
-
-      it 'deletes the <%= model_name.underscore.singularize %>' do
-        expect(<%= model_name.camelize.singularize %>.all.count).to eq 0
       end
     end
   end
