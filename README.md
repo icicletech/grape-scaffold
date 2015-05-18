@@ -21,7 +21,7 @@ And then execute:
 #### Options
   * --skip-model-tests - Skip model tests
   * --skip-controller-tests - Skip controller tests
-  * --controller-path=CONTROLLER_PATH - This can be used to set the path where the controller is generated. By default it's generated under app/controllers/api/v1/
+  * --controller-path=CONTROLLER_PATH - This can be used to set the path where the controller is generated. By default it's generated under `app/controllers/api/v1/`
 
 ### Controller
   The controller generator can be used to generate only the controller and controller specs.
@@ -30,7 +30,7 @@ And then execute:
 
 #### Options
   * --skip-controller-tests - Skip controller tests
-  * --controller-path=CONTROLLER_PATH - This can be used to set the path where the controller is generated. By default it's generated under app/controllers/api/v1/
+  * --controller-path=CONTROLLER_PATH - This can be used to set the path where the controller is generated. By default it's generated under `app/controllers/api/v1/`
 
 ### Contributors
 
