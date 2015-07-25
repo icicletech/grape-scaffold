@@ -4,11 +4,11 @@ module Grape
 
     argument :model_name, type: :string
 
-    class_option :controller_path, desc: 'Set default controller path', type: :string, defaut: 'app/controllers/api/v1'
+    class_option :controller_path, desc: 'Set default controller path', type: :string, default: 'app/controllers/api/v1'
     class_option :skip_controller_tests, :desc => 'Skip generated controller tests', :type => :boolean
 
     def generate_controller
-      template 'controller.erb', "app/controllers/api/v1/#{model_name.pluralize.underscore}.rb"
+      template 'controller.erb', "#{options[:controller_path]}/#{model_name.pluralize.underscore}.rb"
     end
 
     def generate_controller_specs

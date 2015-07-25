@@ -5,7 +5,7 @@ module Grape
     argument :model_name, type: :string
     argument :attributes, type: :array, default: []
 
-    class_option :controller_path, desc: 'Set default controller path', type: :string, defaut: 'app/controllers/api/v1'
+    class_option :controller_path, desc: 'Set default controller path', type: :string, default: 'app/controllers/api/v1'
     class_option :skip_model_tests, :desc => 'Skip generated model tests', :type => :boolean
     class_option :skip_controller_tests, :desc => 'Skip generated controller tests', :type => :boolean
 
