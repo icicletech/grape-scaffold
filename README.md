@@ -35,6 +35,7 @@ And then execute:
 ### Contributors
 
 * [Shrivara K S](https://github.com/shrivaraks)
+* [Srikala Bharadwaj](https://github.com/SrikalaB)
 
 ### License
 
